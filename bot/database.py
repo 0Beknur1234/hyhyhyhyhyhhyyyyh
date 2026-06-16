@@ -1,6 +1,6 @@
 import aiosqlite
 
-DB_PATH = "bot.db"
+DB_PATH = "/app/data/bot.db"
 
 CREATE_BOOKINGS = """
 CREATE TABLE IF NOT EXISTS bookings (
