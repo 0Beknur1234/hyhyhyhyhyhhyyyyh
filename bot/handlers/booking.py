@@ -182,7 +182,8 @@ async def confirm_booking(callback: CallbackQuery, state: FSMContext, bot: Bot) 
     if not callback.from_user:
         return
 
-    _, service_id, booking_date, booking_time = callback.data.split(":")
+    parts = callback.data.split(":")
+    service_id, booking_date, booking_time = parts[1], parts[2], ":".join(parts[3:])
 
     if await is_slot_taken(booking_date, booking_time):
         await callback.answer("Это время уже занято. Выберите другое.", show_alert=True)
