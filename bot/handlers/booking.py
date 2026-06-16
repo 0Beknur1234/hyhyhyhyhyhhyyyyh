@@ -91,7 +91,8 @@ async def slot_taken(callback: CallbackQuery) -> None:
 
 @router.callback_query(F.data.startswith("time:"))
 async def pick_time(callback: CallbackQuery, state: FSMContext) -> None:
-    _, service_id, booking_date, booking_time = callback.data.split(":")
+    parts = callback.data.split(":")
+    service_id, booking_date, booking_time = parts[1], parts[2], ":".join(parts[3:])
 
     if await is_slot_taken(booking_date, booking_time):
         await callback.answer("Это время только что заняли", show_alert=True)
